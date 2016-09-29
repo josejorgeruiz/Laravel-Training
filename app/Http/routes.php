@@ -11,28 +11,20 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
-
-Route::get('/greet/{name?}', function ($name = null) {
-    return view('actions.greet' , ['name' => $name]);
-})->name('greet');
-
-Route::get('/hug', function ($name) {
-    return view('actions.hug');
-})->name('hug');
-
-Route::get('/kiss', function () {
-    return view('actions.kiss');
-})->name('kiss');
-
-Route::post('/benice', function(\Illuminate\Http\Request $request) {
-    if(isset($request['action']) && $request['name']) {
-        if (strlen($request['name']) > 0 ) {
-            return view('actions.nice' , ['action' => $request['action'], 'name'=> $request['name']]);
-        }
-        return redirect()->back();
-    }
-    return redirect()->back();
-})->name('benice');
+    
+Route::group(['prefix' => 'do'], function () {
+        
+    Route::get('/{action}/{name?}', [
+            'uses'=> 'NiceActionController@getNiceAction',
+            'as' => 'niceaction'
+    ]);
+        
+    Route::post('/', [
+            'uses' => 'NiceActionController@postNiceAction',
+            'as' => 'benice'
+    ]);
+});

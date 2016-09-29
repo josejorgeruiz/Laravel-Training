@@ -2,10 +2,20 @@
 
 @section('content')
     <div class="centered">
-        <a href="{{ route('greet') }}">Greet</a>
-        <a href="{{ route('hug') }}">Hug</a>
-        <a href="{{ route('kiss') }}">Kiss</a>
-        <br><br>
+        <a href="{{ route('niceaction', ['action' => 'greet']) }}">Greet</a>
+        <a href="{{ route('niceaction', ['action' => 'greet']) }}">Hug</a>
+        <a href="{{ route('niceaction', ['action' => 'greet']) }}">Kiss</a>
+        <br>
+        <br>
+        @if (count($errors) > 0 )
+            <div>
+                <ul>
+                    @foreach($errors->all() as $error)
+                      Oh! Chute {{ $error }}
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('benice') }}" method="post">
             <lable for ="select-action">I want to..</lable>
             <select id="select-action" name="action">
