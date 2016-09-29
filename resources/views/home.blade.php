@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="centered">
+        S4L15
+    </div>
+    <div class="centered">
         <a href="{{ route('niceaction', ['action' => 'greet']) }}">Greet</a>
         <a href="{{ route('niceaction', ['action' => 'greet']) }}">Hug</a>
         <a href="{{ route('niceaction', ['action' => 'greet']) }}">Kiss</a>
